@@ -1,0 +1,19 @@
+<?php
+
+
+/**
+ * Implements hook_mail().
+ */
+function gb_cbl_contact_form_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'contact_form':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = 'test';
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
