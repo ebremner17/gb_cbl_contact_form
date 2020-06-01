@@ -58,12 +58,16 @@ class ContactForm extends FormBase {
     $mailManager = \Drupal::service('plugin.manager.mail');
     $module = 'gb_cbl_contact_form';
     $key = 'contact_form';
-    $to = 'eric_bremner@bell.net';
-     $params['message'] = 'test';
-     $langcode = \Drupal::currentUser()->getPreferredLangcode();
-     $send = true;
+    $to = 'griffinbrothersofficial@gmail.com';
+    $langcode = \Drupal::currentUser()->getPreferredLangcode();
+    $message = 'You have a new contact from the Griffin Brothers website.\n';
+    $message .= 'Name: ' . $form_state->getValue('name') . '\n';
+    $message .= 'Email: ' . $form_state->getValue('email') . '\n';
+    $message .= 'Message:\n ' . $form_state->getValue('message');
+    $params['message'] = $message;
+    $send = true;
 
-     $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+    $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
 
   }
 }
